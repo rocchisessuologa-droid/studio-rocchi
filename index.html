@@ -2,7 +2,10 @@
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Studio Rocchi</title><link rel="stylesheet" href="style.css"></head>
 <body>
-<div class="shell">
+<div id="notice" role="status" hidden></div>
+<div id="auth" class="auth"><div class="card"><img src="assets/logo.png" width="120" alt="Studio Rocchi"><h1>Benvenuta nel tuo studio</h1><p id="setup-note"></p><form id="login-form" class="form"><label class="full">Email<input name="email" type="email" autocomplete="username" required></label><label class="full">Password<input name="password" type="password" autocomplete="current-password" required></label><p id="login-error" class="full error" role="alert"></p><button class="primary full">Accedi</button></form><button class="ghost wide" onclick="demoStart()">Esplora la demo senza salvare dati</button></div></div>
+<div id="demo-banner" hidden>DEMO · Dati temporanei: non inserire dati reali. Le modifiche si perdono chiudendo o aggiornando la pagina.</div>
+<div class="shell" hidden>
 <aside>
  <div class="logo-wrap"><img src="assets/logo.png" alt=""><div class="brand">STUDIO ROCCHI</div><small>PSICOLOGIA · SESSUOLOGIA · CRIMINOLOGIA</small></div>
  <nav>
@@ -10,13 +13,13 @@
   <button data-page="pazienti">♧ <span>Pazienti</span></button><button data-page="pagamenti">▣ <span>Pagamenti</span></button>
   <button data-page="documenti">□ <span>Documenti</span></button><button data-page="messaggi">☵ <span>Messaggi</span><i>2</i></button>
   <button data-page="statistiche">▥ <span>Statistiche</span></button><button data-page="risorse">◇ <span>Risorse</span></button>
-  <button data-page="impostazioni">⚙ <span>Impostazioni</span></button>
+  <button data-page="promemoria">☑ <span>Promemoria</span></button><button data-page="accessi">♙ <span>Accessi</span></button><button data-page="impostazioni">⚙ <span>Impostazioni</span></button>
  </nav>
  <div class="side-art"><div class="orbit"></div><p>«Ciò che osservi cambia,<br>ciò che accogli si trasforma.»</p></div>
 </aside>
 <main><img class="decor-botanical" src="assets/botanica.png" alt=""><img class="decor-geo" src="assets/geometria.png" alt="">
- <header><div class="search">⌕ &nbsp; Cerca paziente, appuntamento, documento…</div><span>♧</span><b class="avatar">SR</b><span class="doctor">Dott.ssa Rocchi⌄</span></header>
+ <header><input id="search" class="search" aria-label="Cerca" placeholder="Cerca paziente, appuntamento, documento…"><span>♧</span><b class="avatar">SR</b><button id="logout" class="ghost">Esci</button></header>
  <div id="content"></div>
 </main></div>
 <div id="modal" class="modal hide"><div class="modalbox"><button class="close">×</button><div id="modalContent"></div></div></div>
-<script src="app.js"></script></body></html>
+<script src="vendor/xlsx.full.min.js"></script><script src="app.js"></script></body></html>
