@@ -1,22 +1,22 @@
 <!doctype html>
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Studio Rocchi — Beta 3</title><link rel="stylesheet" href="style.css"></head>
+<title>Studio Rocchi</title><link rel="stylesheet" href="style.css"></head>
 <body>
-<div class="app">
+<div class="shell">
 <aside>
-  <div class="brand"><img class="brand-logo" src="logo-transparent.png" alt="Logo Studio Rocchi">
-    <div><b>STUDIO ROCCHI</b><small>Psicologia · Sessuologia · Criminologia</small></div>
-  </div>
-  <nav id="nav"></nav>
-  <div class="aside-quote">«Ciò che osservi cambia,<br>ciò che accogli si trasforma.»</div>
-  <div class="privacy">⌾ Demo · dati fittizi</div>
+ <div class="logo-wrap"><img src="logo.png" alt=""><div class="brand">STUDIO ROCCHI</div><small>PSICOLOGIA · SESSUOLOGIA · CRIMINOLOGIA</small></div>
+ <nav>
+  <button class="active" data-page="home">⌂ <span>Home</span></button><button data-page="agenda">▦ <span>Agenda</span></button>
+  <button data-page="pazienti">♧ <span>Pazienti</span></button><button data-page="pagamenti">▣ <span>Pagamenti</span></button>
+  <button data-page="documenti">□ <span>Documenti</span></button><button data-page="messaggi">☵ <span>Messaggi</span><i>2</i></button>
+  <button data-page="statistiche">▥ <span>Statistiche</span></button><button data-page="risorse">◇ <span>Risorse</span></button>
+  <button data-page="impostazioni">⚙ <span>Impostazioni</span></button>
+ </nav>
+ <div class="side-art"><div class="orbit"></div><p>«Ciò che osservi cambia,<br>ciò che accogli si trasforma.»</p></div>
 </aside>
 <main>
-<header>
-  <div class="top-search">⌕&nbsp;&nbsp; Cerca paziente, appuntamento, documento…</div>
-  <div class="profile"><span class="bell">♧</span><span class="profile-dot">SR</span><span>Dott.ssa Rocchi⌄</span></div>
-</header>
-<section id="view"></section>
+ <header><div class="search">⌕ &nbsp; Cerca paziente, appuntamento, documento…</div><span>♧</span><b class="avatar">SR</b><span class="doctor">Dott.ssa Rocchi⌄</span></header>
+ <div id="content"></div>
 </main></div>
-<div id="modal" class="modal hidden"><div class="modal-card"><button class="x" onclick="closeModal()">×</button><div id="modalBody"></div></div></div>
-<div id="toast"></div><script src="app.js"></script></body></html>
+<div id="modal" class="modal hide"><div class="modalbox"><button class="close">×</button><div id="modalContent"></div></div></div>
+<script src="app.js"></script></body></html>
