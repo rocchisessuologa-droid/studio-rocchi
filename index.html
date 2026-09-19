@@ -1,5 +1,22 @@
-<!doctype html><html lang='it'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Studio Rocchi — Beta 1</title><link rel='stylesheet' href='style.css'></head><body>
-<div class='app'>
-<aside><div class='brand'><div class='mark'>SR</div><div><b>Studio Rocchi</b><small>Gestionale · Beta 1</small></div></div><nav id='nav'></nav><div class='privacy'>🔒 Demo con dati fittizi</div></aside>
-<main><header><div><h1 id='title'>Dashboard</h1><p id='subtitle'>Sabato 19 settembre 2026</p></div><div class='head-actions'><button class='ghost' onclick="showToast('Ricerca globale: prossimamente')">⌕ Cerca</button><button class='primary' onclick="openAppointment()">＋ Nuovo appuntamento</button></div></header><section id='view'></section></main>
-</div><div id='modal' class='modal hidden'><div class='modal-card'><button class='x' onclick='closeModal()'>×</button><div id='modalBody'></div></div></div><div id='toast'></div><script src='app.js'></script></body></html>
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Studio Rocchi — Beta 3</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app">
+<aside>
+  <div class="brand"><img class="brand-logo" src="logo-transparent.png" alt="Logo Studio Rocchi">
+    <div><b>STUDIO ROCCHI</b><small>Psicologia · Sessuologia · Criminologia</small></div>
+  </div>
+  <nav id="nav"></nav>
+  <div class="aside-quote">«Ciò che osservi cambia,<br>ciò che accogli si trasforma.»</div>
+  <div class="privacy">⌾ Demo · dati fittizi</div>
+</aside>
+<main>
+<header>
+  <div class="top-search">⌕&nbsp;&nbsp; Cerca paziente, appuntamento, documento…</div>
+  <div class="profile"><span class="bell">♧</span><span class="profile-dot">SR</span><span>Dott.ssa Rocchi⌄</span></div>
+</header>
+<section id="view"></section>
+</main></div>
+<div id="modal" class="modal hidden"><div class="modal-card"><button class="x" onclick="closeModal()">×</button><div id="modalBody"></div></div></div>
+<div id="toast"></div><script src="app.js"></script></body></html>
