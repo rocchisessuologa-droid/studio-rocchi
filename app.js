@@ -3,7 +3,7 @@ const C=document.getElementById('content'), M=document.getElementById('modal'), 
 const patients=['Vincenzo R.','Arianna S.','Luca P.','Coppia M. & S.','Paziente N.D.'];
 const appts=[['09:00','Vincenzo R.','Seduta individuale'],['10:00','Arianna S.','Valutazione'],['11:00','Collega UK','Supervisione'],['14:00','Paziente G. B.','Seduta individuale'],['15:30','Coppia L. & A.','Seduta di coppia']];
 const apptHTML=()=>appts.map(a=>`<div class="appt"><span>${a[0]}</span><div><b>${a[1]}</b><small>${a[2]}</small></div><b>⋮</b></div>`).join('');
-function home(){C.innerHTML=`<section class="hero"><div><h3>STUDIO ROCCHI</h3><small>PSICOLOGIA · SESSUOLOGIA · CRIMINOLOGIA</small><br><small>ASCOLTARE · COMPRENDERE · TRASFORMARE</small></div><div class="branch">❧ ❧ ❧</div><p>Persone<br>relazioni<br>possibilità</p></section>
+function home(){C.innerHTML=`<section class="hero"><img class="hero-bird" src="assets/colibri.png" alt=""><div><h3>STUDIO ROCCHI</h3><small>PSICOLOGIA · SESSUOLOGIA · CRIMINOLOGIA</small><br><small>ASCOLTARE · COMPRENDERE · TRASFORMARE</small></div><div class="branch">❧ ❧ ❧</div><p>Persone<br>relazioni<br>possibilità</p></section>
 <div class="greeting"><div><h1>Buongiorno, Stefania</h1><small>Sabato 19 settembre 2026</small></div><em>“La cura è anche organizzazione.”</em></div>
 <div class="stats">${[['▣','5','Appuntamenti oggi'],['♧','28','Pazienti attivi'],['▤','3','Documenti da firmare'],['€','4','Pagamenti in sospeso']].map(x=>`<div class="stat"><span>${x[0]}</span><b>${x[1]}</b><small>${x[2]}</small></div>`).join('')}</div>
 <div class="dash">
