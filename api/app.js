@@ -1,4 +1,4 @@
-import {randomUUID,timingSafeEqual} from 'node:crypto';
+import {randomUUID,timingSafeEqual,createHash} from 'node:crypto';
 const fail=(m,s=400)=>{throw Object.assign(new Error(m),{status:s})};
 const uuid=x=>/^[0-9a-f-]{36}$/i.test(x||'');
 export function validate(r){
@@ -76,10 +76,17 @@ export default async function handler(req,res){
   if(action==='upload'){
    if(!uuid(b.patientId)||!b.name||!b.base64)fail('Allegato non valido');
    const p=await sb('/rest/v1/records?id=eq.'+b.patientId+'&kind=eq.patients');if(!p.length)fail('Paziente non trovato');
+   const consent=b.documentType==='consent-autograph';
+   if(b.documentType&&!consent)fail('Tipo di documento non valido');
+   if(consent&&(!['email','whatsapp','mano','altro'].includes(b.receivedVia)||!/^\d{4}-\d{2}-\d{2}$/.test(b.receivedDate||'')||!Number.isFinite(Date.parse(b.receivedDate))))fail('Indica la data e il canale di ricezione');
+   if(consent&&!/\.pdf$/i.test(b.name))fail('Per il consenso carica un PDF');
    if(!/\.(pdf|docx?|xlsx?|png|jpe?g|gif|webp|txt|odt)$/i.test(b.name))fail('Formato non supportato');
    const bytes=Buffer.from(b.base64,'base64');if(bytes.length>3*1024*1024)fail('Dimensione massima: 3 MB');
+   if(consent&&(!bytes.subarray(0,5).equals(Buffer.from('%PDF-'))||bytes.length<100))fail('Il file non sembra un PDF valido');
    const id=randomUUID(),path=b.patientId+'/'+id;await sb('/storage/v1/object/patient-files/'+path,{method:'POST',headers:{'Content-Type':'application/octet-stream'},body:bytes});
-   try{await sb('/rest/v1/records',{method:'POST',body:json({id,kind:'documents',data:{patientId:b.patientId,name:b.name,path,uploadedAt:new Date().toISOString()}})})}catch(e){await sb('/storage/v1/object/patient-files',{method:'DELETE',body:json({prefixes:[path]})});throw e}return res.json({ok:true});
+   const data={patientId:b.patientId,name:String(b.name).slice(0,180),path,uploadedAt:new Date().toISOString(),sha256:createHash('sha256').update(bytes).digest('hex')};
+   if(consent)Object.assign(data,{documentType:'consent-autograph',signatureType:'Firma autografa su carta — copia PDF',receivedVia:b.receivedVia,receivedDate:b.receivedDate});
+   try{await sb('/rest/v1/records',{method:'POST',body:json({id,kind:'documents',data})})}catch(e){await sb('/storage/v1/object/patient-files',{method:'DELETE',body:json({prefixes:[path]})});throw e}return res.json({ok:true});
   }
   if(action==='download'){
    if(!uuid(b.id))fail('Allegato non valido');const r=(await sb('/rest/v1/records?id=eq.'+b.id+'&kind=eq.documents'))[0];if(!r)fail('Non trovato',404);

@@ -88,3 +88,11 @@ Messaggi, Statistiche e Risorse restano le sezioni non operative della beta prec
 Riferimenti: https://supabase.com/docs/guides/auth/passwords — https://zapier.com/apps/google-calendar/integrations — https://support.apple.com/guide/calendar/welcome/mac
 
 Sviluppo locale: Node 22 o successivo; `node --env-file=.env server.mjs` con credenziali server, oppure `npm start` per esplorare la demo. Il server locale non sostituisce l’hosting HTTPS.
+
+## Consenso firmato a penna (beta 9)
+
+Nella scheda del paziente usa **Carica consenso con firma autografa**. Carica il PDF ricevuto, indica la data e il canale di ricezione. Il documento compare nella scheda e nella sezione Documenti, con impronta SHA-256 e data di caricamento registrata dal server. La vecchia spunta manuale, se esiste, è mostrata come indicazione precedente senza documento e non equivale a un PDF acquisito.
+
+Il PDF scansionato è una copia del modulo con firma autografa, non una firma digitale. Conserva separatamente l'eventuale originale cartaceo e il messaggio originale di trasmissione; verifica identità e completezza del modulo prima di caricarlo. Se il file non è leggibile o contiene pagine mancanti, richiedi una nuova copia. I documenti caricati restano nell'archivio privato `patient-files`, accessibili solo agli utenti abilitati del gestionale. La firma e la validità dei contenuti non sono verificate automaticamente dal software.
+
+**Prima di inserire dati reali:** verifica la nomina dei fornitori come responsabili del trattamento, ubicazione e trasferimenti dei dati, regole di accesso del personale, copie di sicurezza e ripristino, tempi di conservazione, eventuale valutazione d'impatto e procedura di gestione delle violazioni. La presenza di un PDF nell'archivio non certifica da sola la conformità GDPR o una conservazione digitale a norma. Non condividere il link temporaneo di download del documento.
