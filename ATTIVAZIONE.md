@@ -1,11 +1,11 @@
-# Studio Rocchi — aggiornamento 7
+# Studio Rocchi — beta 10 · consenso informato online
 
-Questo pacchetto aggiorna la grafica della beta 6 e aggiunge gestione dati, accessi e funzionalità. Non è ancora collegato al tuo account Vercel, a un database o a Zapier. La pubblicazione precedente non viene modificata dalla consegna di questo ZIP.
+Questo pacchetto mantiene le funzioni della beta 9 e aggiunge il consenso informato online con link personale, monouso e a scadenza. La pubblicazione precedente non viene modificata finché non carichi questi file su GitHub/Vercel.
 
 ## 1. Attiva l’archivio online
 
 1. Crea un progetto Supabase dedicato su https://supabase.com/dashboard. Scegli una regione europea e conserva la password del database.
-2. Apri SQL Editor e incolla tutto il file `schema.sql`. Eseguilo una sola volta sul nuovo progetto.
+2. Apri SQL Editor e incolla tutto il file `schema.sql`. Su un progetto nuovo eseguilo integralmente. Se stai aggiornando la beta 9, puoi eseguirlo di nuovo: usa `create table if not exists`/`create or replace` e aggiunge la tabella `consent_links` necessaria ai link online.
 3. In Authentication → Users crea il tuo utente amministratore con email e password forte. Conferma l’email tramite il comando amministrativo e copia il suo UUID.
 4. Esegui questa istruzione nel SQL Editor, sostituendo UUID ed email:
 
@@ -81,7 +81,7 @@ Ricarica tutti i dati già salvati nell’archivio online, compresi gli eventi r
 
 ## Verifiche e limiti
 
-Sono passati cinque test automatici: validazione appuntamenti, autorizzazione dei ruoli, protezione del webhook, flussi di dati della demo e lettura/scrittura XLS. La verifica visiva in un browser non è stata completata perché il browser di test non era disponibile. I collegamenti reali con Supabase, Vercel, Storage e Zapier richiedono la configurazione descritta e un collaudo online prima di utilizzare dati di pazienti. Prima dell’uso reale, verifica anche backup, gestione della conservazione, accordi con i fornitori e permessi appropriati all’attività clinica. Non è una certificazione di conformità del gestionale.
+Sono passati sei test automatici: validazione appuntamenti, autorizzazione dei ruoli, protezione del webhook, flussi di dati della demo e lettura/scrittura XLS. La verifica visiva in un browser non è stata completata perché il browser di test non era disponibile. I collegamenti reali con Supabase, Vercel, Storage e Zapier richiedono la configurazione descritta e un collaudo online prima di utilizzare dati di pazienti. Prima dell’uso reale, verifica anche backup, gestione della conservazione, accordi con i fornitori e permessi appropriati all’attività clinica. Non è una certificazione di conformità del gestionale.
 
 Messaggi, Statistiche e Risorse restano le sezioni non operative della beta precedente. Non sono state richieste in questo aggiornamento.
 
@@ -96,3 +96,21 @@ Nella scheda del paziente usa **Carica consenso con firma autografa**. Carica il
 Il PDF scansionato è una copia del modulo con firma autografa, non una firma digitale. Conserva separatamente l'eventuale originale cartaceo e il messaggio originale di trasmissione; verifica identità e completezza del modulo prima di caricarlo. Se il file non è leggibile o contiene pagine mancanti, richiedi una nuova copia. I documenti caricati restano nell'archivio privato `patient-files`, accessibili solo agli utenti abilitati del gestionale. La firma e la validità dei contenuti non sono verificate automaticamente dal software.
 
 **Prima di inserire dati reali:** verifica la nomina dei fornitori come responsabili del trattamento, ubicazione e trasferimenti dei dati, regole di accesso del personale, copie di sicurezza e ripristino, tempi di conservazione, eventuale valutazione d'impatto e procedura di gestione delle violazioni. La presenza di un PDF nell'archivio non certifica da sola la conformità GDPR o una conservazione digitale a norma. Non condividere il link temporaneo di download del documento.
+
+
+## Consenso informato online (beta 10)
+
+Nella scheda del paziente trovi **Genera link consenso online**. Il server crea un token casuale, conserva soltanto la sua impronta SHA-256, lo collega al paziente e lo rende valido per 7 giorni. La generazione di un nuovo link invalida i precedenti link non ancora utilizzati per lo stesso paziente.
+
+Dopo la generazione puoi:
+- copiare il link;
+- aprire WhatsApp con un messaggio già predisposto;
+- aprire una nuova email con oggetto e testo già predisposti.
+
+Il paziente apre il link senza accedere al gestionale, visualizza il testo del consenso, inserisce nome e cognome e data di nascita, seleziona la casella di conferma e invia. Il nominativo deve corrispondere a quello presente nella scheda paziente. Una volta completato, il link non è più utilizzabile.
+
+La conferma crea automaticamente un documento nella scheda paziente e nella sezione **Documenti**. Sono registrati data e ora, versione del testo, metodo di conferma, impronta della dichiarazione e impronta SHA-256 della ricevuta. La ricevuta è conservata nel bucket privato `patient-files` e viene scaricata tramite URL temporaneo.
+
+**Importante:** questa procedura documenta una conferma elettronica e non viene presentata come firma digitale qualificata. Il testo incluso è un modello operativo generico: prima dell'uso reale va verificato e, se necessario, adattato alla tua informativa, alle indicazioni dell'Ordine, al tuo assetto privacy e alle specifiche prestazioni offerte. La presenza del link, del log e della ricevuta non costituisce da sola certificazione di conformità GDPR o di conservazione digitale a norma.
+
+Per l'aggiornamento da beta 9, prima di usare il pulsante online esegui il nuovo `schema.sql` su Supabase e poi pubblica tutti i file della beta 10 su GitHub/Vercel.
