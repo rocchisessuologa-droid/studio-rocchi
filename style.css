@@ -52,3 +52,9 @@ main{position:relative;overflow:hidden}.decor-botanical{position:absolute;right:
 /* Il link generato nel popup deve restare leggibile sul tema scuro */
 .consent-link-box{color:#18241f!important;background:#f7f7f4!important;border-color:rgba(0,0,0,.18)!important;font-weight:600}
 @media(max-width:520px){.doc-row{grid-template-columns:22px minmax(0,1fr)}.doc-actions{grid-column:2}.doc-actions .ghost{width:100%}.stats .stat-link{min-height:110px}}
+
+/* Beta 14 · stato consenso a colpo d'occhio */
+.consent-dot{width:11px;height:11px;margin-right:7px;border-radius:50%;display:inline-block;vertical-align:middle;flex:0 0 auto}
+.consent-dot-red{background:#d85b5b;box-shadow:0 0 0 2px rgba(216,91,91,.16)}
+.consent-dot-yellow{background:#e0b84f;box-shadow:0 0 0 2px rgba(224,184,79,.16)}
+.consent-dot-green{background:#45b36b;box-shadow:0 0 0 2px rgba(69,179,107,.16)}
