@@ -114,3 +114,10 @@ La conferma crea automaticamente un documento nella scheda paziente e nella sezi
 **Importante:** questa procedura documenta una conferma elettronica e non viene presentata come firma digitale qualificata. Il testo incluso è un modello operativo generico: prima dell'uso reale va verificato e, se necessario, adattato alla tua informativa, alle indicazioni dell'Ordine, al tuo assetto privacy e alle specifiche prestazioni offerte. La presenza del link, del log e della ricevuta non costituisce da sola certificazione di conformità GDPR o di conservazione digitale a norma.
 
 Per l'aggiornamento da beta 9, prima di usare il pulsante online esegui il nuovo `schema.sql` su Supabase e poi pubblica tutti i file della beta 10 su GitHub/Vercel.
+
+## Beta 12 - modulo consenso online basato sul PDF Studio Rocchi
+Il pulsante **Genera link consenso online** nella scheda paziente apre ora un modulo completo basato sul modello "Modulo per la prestazione professionale psicologica (Consenso informato + condizioni economiche)".
+
+Il paziente compila anagrafica, prestazione, modalità e consensi. Al salvataggio il server genera un PDF, lo archivia automaticamente nel bucket `patient-files`, crea il documento collegato alla scheda paziente e restituisce un link temporaneo per scaricarlo/stamparlo.
+
+Non sono richieste nuove tabelle rispetto alla Beta 10/11: resta necessaria la tabella `consent_links` già presente nello `schema.sql` del progetto.
